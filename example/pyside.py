@@ -44,22 +44,22 @@ class FilePickWighet(QWidget):
 
         self.setLayout(layout)
 
-    def pop(self):
+    def pop(self)-> None:
         self.dialog.exec_()
 
-    def setfile(self, file):
+    def setfile(self, file:str)-> None:
         self.line.setText(file)
 
-    def getfile(self):
+    def getfile(self)-> str:
         return self.line.text()
 
-    def init(self):
+    def init(self)-> None:
         self.line.setText('')
 
 
 class MainWindow(QMainWindow):
 
-    def __init__(self):
+    def __init__(self)->None:
         super().__init__()
         self.setWindowTitle("My Hash")
         self.setFixedSize(QSize(800, 600))
@@ -107,7 +107,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.contain)
         self.init()
 
-    def hash(self, checked):
+    def hash(self, checked:bool)->None:
         if checked:
             self.filepick2.hide()
             self.filepick2.init()
@@ -115,14 +115,14 @@ class MainWindow(QMainWindow):
             self.progressBar.hide()
             # self.info.clear()
 
-    def compare(self, checked):
+    def compare(self, checked:bool)->None:
         if checked:
             self.filepick2.show()
             self.filepick2.init()
             self.info.clear()
             self.progressBar.hide()
 
-    def init(self):
+    def init(self)->None:
         self.radio.setChecked(True)
         self.progressBar.hide()
         self.progressBar.setMinimum(0)
@@ -131,7 +131,7 @@ class MainWindow(QMainWindow):
         # self.info.append('-- INFO --\n')
         self.go.clicked.connect(self.start)
 
-    def fileHash(self):
+    def fileHash(self)->None:
         # data=[]
         hash_list = ['md5', 'sh1', 'sha256']
         hash_funs = {
@@ -171,7 +171,7 @@ class MainWindow(QMainWindow):
             # self.info.append('\n'+'~'*25)
             self.progressBar.setValue(100)
 
-    def fileCompare(self):
+    def fileCompare(self)->None:
         hash_list = ['md5', 'sh1', 'sha256']
         hash_funs = {
             'md5': hashlib.md5,
@@ -222,7 +222,7 @@ class MainWindow(QMainWindow):
             self.info.append("<font color=red>\nresult:<b>%10s</b>\n</font>" % 'No')
 
 
-    def start(self):
+    def start(self)->None:
         self.info.clear()
         self.progressBar.show()
         if self.radio.isChecked():
